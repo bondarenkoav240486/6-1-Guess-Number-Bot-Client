@@ -21,11 +21,12 @@ function App() {
     const submitGuess = async () => {
         try {
             const response = await axios.post('http://localhost:3001/guess', { guess: Number(guess) });
+            console.log(response.data);
             const resultMessage = response.data.result === 'less'
-                ? 'The number is less.'
+                ? 'Загадане число меньше.'
                 : response.data.result === 'greater'
-                    ? 'The number is greater.'
-                    : 'Congratulations! You guessed the number!';
+                    ? 'Загадане число більше.'
+                    : 'Число вгадано!';
 
             setMessage(resultMessage);
             if (response.data.result === 'correct') {
@@ -39,24 +40,24 @@ function App() {
     return (
         <Container maxWidth="sm" style={{ marginTop: '2rem', textAlign: 'center' }}>
             <Typography variant="h4" gutterBottom>
-                Guess the Number
+                Вгадай Число
             </Typography>
             {!gameStarted ? (
                 <Button variant="contained" color="primary" onClick={startGame}>
-                    Start Game
+                    Почати гру
                 </Button>
             ) : (
-                <div>
+                <div className='textField-and-button'>
                     <TextField
                         type="number"
-                        label="Your Guess"
+                        label="Ваша Спроба"
                         variant="outlined"
                         value={guess}
                         onChange={(e) => setGuess(e.target.value)}
                         style={{ marginRight: '1rem' }}
                     />
                     <Button variant="contained" color="secondary" onClick={submitGuess}>
-                        Submit Guess
+                        Надішліть спробу
                     </Button>
                 </div>
             )}
