@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField, Typography, Container } from '@mui/material';
 import axios from 'axios';
+import './App.css';
 
 function App() {
     const [guess, setGuess] = useState('');
@@ -38,7 +39,9 @@ function App() {
     };
 
     return (
-        <Container maxWidth="sm" style={{ marginTop: '2rem', textAlign: 'center' }}>
+        <Container maxWidth="sm" style={{ marginTop: '2rem', textAlign: 'center' }}
+            className='wrapper'
+        >
             <Typography variant="h4" gutterBottom>
                 Вгадай Число
             </Typography>
