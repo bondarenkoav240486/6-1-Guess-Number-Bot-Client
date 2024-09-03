@@ -8,9 +8,13 @@ function App() {
     const [message, setMessage] = useState('');
     const [gameStarted, setGameStarted] = useState(false);
 
+    // Використання змінної оточення для URL сервера
+    const baseURL = process.env.REACT_APP_API_URL; // Додано змінну для базового URL
+
     const startGame = async () => {
         try {
-            const response = await axios.post('http://localhost:3001/start_game');
+            // const response = await axios.post('http://localhost:3001/start_game');
+            const response = await axios.post(`${baseURL}/start_game`); // Використання змінної оточення
             console.log(response.data.targetNumber)
             setMessage(response.data.message);
             setGameStarted(true);
@@ -21,8 +25,8 @@ function App() {
 
     const submitGuess = async () => {
         try {
-            const response = await axios.post('http://localhost:3001/guess', { guess: Number(guess) });
-            console.log(response.data);
+            // const response = await axios.post('http://localhost:3001/guess', { guess: Number(guess) });
+            const response = await axios.post(`${baseURL}/guess`, { guess: Number(guess) }); // Використання змінної оточення
             const resultMessage = response.data.result === 'less'
                 ? 'Загадане число меньше.'
                 : response.data.result === 'greater'
